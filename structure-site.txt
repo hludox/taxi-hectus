@@ -1,1 +1,7 @@
-
+# Structure du site
+- Framework : Next.js, hébergé sur Vercel (gratuit)
+- Pages : /pages/index.jsx (accueil), /pages/reservation.jsx, /pages/admin/planning.jsx
+- Composants : /components/ReservationForm.jsx (formulaire)
+- Images : /public/images/background.webp (fond)
+- SEO : Mots-clés dans H1, métadonnées, sitemap.xml
+- Design : Vert (#2e7d32, #66bb6a), Montserrat, responsive
