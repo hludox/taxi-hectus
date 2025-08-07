@@ -6,8 +6,8 @@ import ReservationForm from '../components/ReservationForm';
 export default function Reservation() {
   const [selectedService, setSelectedService] = useState('course');
   const services = [
-    { id: 'course', name: 'Course Simple', description: 'Trajet d'un point A à B', icon: '🚗' },
-    { id: 'aeroport', name: 'Transfert Aéroport', description: 'Navette aéroport Pôle Caraïbes', icon: '✈️' },
+    { id: 'course', name: 'Course Simple', description: 'Trajet de point A vers B', icon: '🚗' },
+    { id: 'aeroport', name: 'Transfert Aéroport', description: 'Navette aéroport Pole Caraibes', icon: '✈️' },
     { id: 'excursion', name: 'Excursion/Attente', description: 'Service avec attente (plage, visite)', icon: '🏖️' },
   ];
 
