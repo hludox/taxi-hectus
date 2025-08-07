@@ -14,10 +14,10 @@ export default function ReservationForm({ selectedService }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const communes = [
-    'Les Abymes', 'Baie-Mahault', 'Le Gosier', 'Pointe-à-Pitre',
-    'Sainte-Anne', 'Saint-François', 'Le Moule', 'Morne-à-l\'Eau',
+    'Les Abymes', 'Baie-Mahault', 'Le Gosier', 'Pointe-a-Pitre',
+    'Sainte-Anne', 'Saint-Francois', 'Le Moule', 'Morne-a-l-Eau',
     'Petit-Canal', 'Port-Louis', 'Anse-Bertrand', 'Lamentin',
-    'Capesterre-Belle-Eau', 'Gourbeyre', 'Trois-Rivières',
+    'Capesterre-Belle-Eau', 'Gourbeyre', 'Trois-Rivieres',
     'Baillif', 'Basse-Terre', 'Saint-Claude', 'Goyave',
     'Petit-Bourg', 'Sainte-Rose', 'Deshaies', 'Pointe-Noire',
     'Bouillante', 'Vieux-Habitants', 'Terre-de-Haut', 'Terre-de-Bas'
