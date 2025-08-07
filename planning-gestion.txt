@@ -1,1 +1,6 @@
-
+# Planning de gestion pour Sarl Taxi Hectus
+1. Connectez-vous à https://cal.com/sarl-taxi-hectus pour bloquer des jours/heures (ex. : 15/08 absent).
+2. Accédez à /admin/planning, entrez "taxi971", ajoutez réservations manuelles via Cal.com.
+3. Copiez votre image WebP dans /public/images (ex. : C:\Images\background.webp).
+4. Mettez à jour le code sur GitHub, faites "git push" ou cliquez "Deploy" sur Vercel.
+5. Vérifiez Google Search Console pour soumettre sitemap.xml après chaque mise à jour.
