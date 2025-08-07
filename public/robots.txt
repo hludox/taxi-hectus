@@ -1,1 +1,4 @@
-
+# Permet à Google d'indexer le site
+User-agent: *
+Allow: /
+Sitemap: https://sarl-taxi-hectus.vercel.app/sitemap.xml
