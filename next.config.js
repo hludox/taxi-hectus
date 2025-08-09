@@ -8,9 +8,13 @@ const nextConfig = {
   swcMinify: true,
   images: {
     formats: ['image/webp', 'image/avif'],
-    minimumCacheTTL: 31536000,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
-  // redirections existantes (si utiles)
   async redirects() {
     return [
       {
@@ -20,10 +24,15 @@ const nextConfig = {
       },
     ];
   },
-  // Headers de sécurité et cache — appliqués seulement en production
   async headers() {
     if (!isProd) return [];
     return [
+      {
+        source: '/_next/static/(.*)',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
       {
         source: '/(.*)',
         headers: [
@@ -31,9 +40,6 @@ const nextConfig = {
           { key: 'X-Content-Type-Options', value: 'nosniff' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
-          // Cache long pour assets statiques (images, js, css)
-          // ATTENTION: si tu change souvent les assets, invalide le cache via nouveau nom de fichier ou versionning
-          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
         ],
       },
     ];
