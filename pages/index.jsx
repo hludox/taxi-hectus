@@ -71,3 +71,7 @@ export default function Home() {
     </>
   );
 }
+// Force static generation for best performance
+export async function getStaticProps() {
+  return { props: {} };
+}
