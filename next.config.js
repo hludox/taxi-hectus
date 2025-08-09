@@ -13,7 +13,7 @@ const nextConfig = {
   },
   
   // Headers performance
-  /*async headers() {
+  async headers() {
     return [
       {
         source: '/(.*)',
@@ -25,7 +25,7 @@ const nextConfig = {
         ],
       },
     ];
-  },*/
+  },
   
   async redirects() {
     return [
