@@ -22,6 +22,11 @@ export default function ReservationForm({ selectedService }) {
         <label className="block text-sm font-medium text-gray-700">Type de trajet</label>
         <input type="text" value={selectedService} readOnly className="w-full p-2 border rounded-lg" />
       </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700">Votre numéro de téléphone (obligatoire pour contact)</label>
+        <input type="tel" className="w-full p-2 border rounded-lg" required placeholder="Ex. 0690 52 37 36" />
+      </div>
+      <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded-lg">Confirmer</button>
     </form>
   );
 }
