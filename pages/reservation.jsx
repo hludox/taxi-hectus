@@ -6,8 +6,8 @@ import ReservationForm from '../components/ReservationForm';
 export default function Reservation() {
   const [selectedService, setSelectedService] = useState('course');
   const services = [
-    { id: 'course', name: 'Course Simple', description: 'Trajet de point A vers B', icon: '🚗' },
-    { id: 'aeroport', name: 'Transfert Aéroport', description: 'Navette aéroport Pole Caraibes', icon: '✈️' },
+    { id: 'course', name: 'Course Simple', description: 'Trajet d’un point A à B', icon: '🚗' },
+    { id: 'aeroport', name: 'Transfert Aéroport', description: 'Navette aéroport Pôle Caraïbes', icon: '✈️' },
     { id: 'excursion', name: 'Excursion/Attente', description: 'Service avec attente (plage, visite)', icon: '🏖️' },
   ];
 
@@ -17,7 +17,6 @@ export default function Reservation() {
         <title>Réserver Taxi Hectus | Guadeloupe 24/7</title>
         <meta name="description" content="Réservez votre taxi en Guadeloupe (Capesterre-Belle-Eau, Saint-François, Les Abymes, etc.). Trajets aéroport, touristiques, locaux. Confirmation par e-mail/SMS." />
         <meta name="keywords" content="taxi Guadeloupe, réserver taxi Capesterre-Belle-Eau, taxi Saint-François, taxi aéroport Pointe-à-Pitre, chauffeur privé Guadeloupe" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="canonical" href="https://sarl-taxi-hectus.vercel.app/reservation" />
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
       </Head>
@@ -29,6 +28,7 @@ export default function Reservation() {
               <div className="flex space-x-4">
                 <Link href="/" className="text-gray-600 hover:text-green-600 px-3 py-2">Accueil</Link>
                 <span className="text-green-700 px-3 py-2">Réserver</span>
+                <Link href="/blog" className="text-gray-600 hover:text-green-600 px-3 py-2">Blog</Link>
                 <a href="tel:+590690523736" className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">0690 52 37 36</a>
               </div>
             </div>
@@ -44,7 +44,7 @@ export default function Reservation() {
                 <div
                   key={service.id}
                   onClick={() => setSelectedService(service.id)}
-                  className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${selectedService === service.id ? 'border-green-600 bg-green-50' : 'border-gray-200 bg-white hover:border-green-300'}`}
+                  className={`p-4 rounded-lg border-2 cursor-pointer ${selectedService === service.id ? 'border-green-600 bg-green-50' : 'border-gray-200 bg-white hover:border-green-300'}`}
                 >
                   <div className="text-2xl mb-2">{service.icon}</div>
                   <h3 className="font-semibold text-gray-900">{service.name}</h3>
@@ -54,17 +54,19 @@ export default function Reservation() {
             </div>
           </div>
           <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">Détails de la réservation</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">Détails de votre réservation</h2>
             <ReservationForm selectedService={selectedService} />
           </div>
+          <p className="text-center text-gray-600 mb-4">Vous recevrez un appel de ma part pour confirmation.</p>
+          <button className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700">Confirmer la commande</button>
           <div className="bg-white rounded-lg shadow-sm p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">Choisir une date et heure</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">Aperçu des disponibilités</h2>
             <iframe
-              src="https://cal.com/ludovic-hectus-jmw8zo/taxi-guadeloupe?embed=true"
+              src="https://cal.com/sarl-taxi-hectus/taxi-guadeloupe?embed=true"
               width="100%"
               height="600"
               frameBorder="0"
-              title="Réservation Taxi Hectus"
+              title="Aperçu disponibilités Taxi Hectus"
               className="w-full"
             ></iframe>
           </div>
