@@ -57,12 +57,10 @@ export default function Reservation() {
             <h2 className="text-xl font-semibold text-gray-900 mb-6">Détails de votre réservation</h2>
             <ReservationForm selectedService={selectedService} />
           </div>
-          <p className="text-center text-gray-600 mb-4">Vous recevrez un appel de ma part pour confirmation.</p>
-          <button className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700">Confirmer la commande</button>
           <div className="bg-white rounded-lg shadow-sm p-6">
             <h2 className="text-xl font-semibold text-gray-900 mb-6">Aperçu des disponibilités</h2>
             <iframe
-              src="https://cal.com/ludovic-hectus-jmw8zo/taxi-guadeloupe?embed=true"
+              src="https://cal.com/sarl-taxi-hectus/taxi-guadeloupe?embed=true"
               width="100%"
               height="600"
               frameBorder="0"
@@ -71,6 +69,18 @@ export default function Reservation() {
             ></iframe>
           </div>
         </div>
+        <footer className="bg-gray-800 text-white p-4 text-center">
+          <p>Vous recevrez un appel de ma part pour confirmation.</p>
+          <div className="mt-4 flex justify-center space-x-4">
+            <a href="tel:+590690523736" title="Appeler"><img src="/images/phone.svg" alt="Téléphone" className="w-8 h-8" /></a>
+            <a href="sms:+590690523736" title="Envoyer un SMS"><img src="/images/sms.svg" alt="SMS" className="w-8 h-8" /></a>
+            <a href="https://wa.me/0590690523736" title="WhatsApp"><img src="/images/whatsapp.svg" alt="WhatsApp" className="w-8 h-8" /></a>
+            <a href="mailto:hludox@gmail.com" title="Envoyer un e-mail"><img src="/images/email.svg" alt="E-mail" className="w-8 h-8" /></a>
+            <a href="https://www.facebook.com/sarltaxihectus" title="Facebook"><img src="/images/facebook.svg" alt="Facebook" className="w-8 h-8" /></a>
+            <a href="https://www.instagram.com/sarl_taxi_hectus" title="Instagram"><img src="/images/instagram.svg" alt="Instagram" className="w-8 h-8" /></a>
+            <a href="https://www.tripadvisor.fr/Attraction_Review-g3411234-d33368528-Reviews-Sarl_Taxi_Hectus-capesterre_belle_eau_Basse_Terre_Island_Guadeloupe.html" title="TripAdvisor"><img src="/images/tripadvisor.svg" alt="TripAdvisor" className="w-8 h-8" /></a>
+          </div>
+        </footer>
       </div>
     </>
   );
