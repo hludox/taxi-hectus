@@ -32,7 +32,7 @@ export default function Reservation() {
   };
 
   const confirmReservation = () => {
-    // Ici, envoi manuel à Cal.com ou e-mail (pas auto)
+    // Envoi manuel (pas auto pour éviter les bots)
     alert('Réservation confirmée ! Validation définitive. Vous recevrez un appel de ma part.');
     setShowRecap(false);
   };
@@ -94,6 +94,24 @@ export default function Reservation() {
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-0 md:grid md:grid-cols-2 md:gap-4">
               <div className="md:flex md:space-x-4 md:col-span-2">
                 <div className="w-full">
+                  <label className="block text-sm font-medium text-gray-700">Nom</label>
+                  <input type="text" name="nom" className="w-full p-2 border rounded-lg" required />
+                </div>
+                <div className="w-full">
+                  <label className="block text-sm font-medium text-gray-700">Prénom</label>
+                  <input type="text" name="prenom" className="w-full p-2 border rounded-lg" required />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Téléphone</label>
+                <input type="tel" name="phone" className="w-full p-2 border rounded-lg" required />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Type de trajet</label>
+                <input type="text" value={selectedService} readOnly name="service" className="w-full p-2 border rounded-lg" />
+              </div>
+              <div className="md:flex md:space-x-4 md:col-span-2">
+                <div className="w-full">
                   <label className="block text-sm font-medium text-gray-700">Date</label>
                   <input type="date" name="date" className="w-full p-2 border rounded-lg" required />
                 </div>
@@ -122,24 +140,6 @@ export default function Reservation() {
                   </select>
                 </div>
               </div>
-              <div className="md:flex md:space-x-4 md:col-span-2">
-                <div className="w-full">
-                  <label className="block text-sm font-medium text-gray-700">Nom</label>
-                  <input type="text" name="nom" className="w-full p-2 border rounded-lg" required />
-                </div>
-                <div className="w-full">
-                  <label className="block text-sm font-medium text-gray-700">Prénom</label>
-                  <input type="text" name="prenom" className="w-full p-2 border rounded-lg" required />
-                </div>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Type de trajet</label>
-                <input type="text" value={selectedService} readOnly name="service" className="w-full p-2 border rounded-lg" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Téléphone</label>
-                <input type="tel" name="phone" className="w-full p-2 border rounded-lg" required />
-              </div>
               <div className="col-span-2">
                 <button type="submit" className="w-full bg-green-600 text-white p-3 rounded-lg hover:bg-green-700">Réserver</button>
               </div>
@@ -159,6 +159,28 @@ export default function Reservation() {
                 title="Aperçu des disponibilités Taxi Hectus"
                 className="w-full"
               ></iframe>
+            </div>
+          )}
+
+          {/* Modal de récapitulatif */}
+          {showRecap && (
+            <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
+              <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">Confirmer votre réservation</h3>
+                <p className="mb-2"><strong>Nom :</strong> {formData.nom}</p>
+                <p className="mb-2"><strong>Prénom :</strong> {formData.prenom}</p>
+                <p className="mb-2"><strong>Téléphone :</strong> {formData.phone}</p>
+                <p className="mb-2"><strong>Type de trajet :</strong> {formData.service}</p>
+                <p className="mb-2"><strong>Date :</strong> {formData.date}</p>
+                <p className="mb-2"><strong>Heure :</strong> {formData.time}</p>
+                <p className="mb-2"><strong>Lieu de prise en charge :</strong> {formData.pickup}</p>
+                <p className="mb-2"><strong>Destination :</strong> {formData.destination}</p>
+                <p className="text-red-600 mb-4">Attention : Validation définitive, seul moi (le propriétaire) peux modifier.</p>
+                <div className="flex justify-end space-x-4">
+                  <button onClick={() => setShowRecap(false)} className="bg-gray-500 text-white p-2 rounded-lg">Annuler</button>
+                  <button onClick={confirmReservation} className="bg-green-600 text-white p-2 rounded-lg">Confirmer</button>
+                </div>
+              </div>
             </div>
           )}
         </div>
