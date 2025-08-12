@@ -22,7 +22,9 @@ export default function Reservation() {
       date: data.get('date'),
       time: data.get('time'),
       pickup: data.get('pickup'),
+      pickupPrecision: data.get('pickupPrecision'),
       destination: data.get('destination'),
+      destinationPrecision: data.get('destinationPrecision'),
       nom: data.get('nom'),
       prenom: data.get('prenom'),
       service: selectedService,
@@ -44,7 +46,7 @@ export default function Reservation() {
         <meta name="description" content="Réservez votre taxi en Guadeloupe en quelques clics. Service disponible dans toutes les communes : Les Abymes, Gosier, Saint-François, Pointe-à-Pitre. Confirmation immédiate." />
         <meta name="keywords" content="réserver taxi Guadeloupe, réservation taxi 971, booking taxi Antilles, taxi Les Abymes réservation, taxi Gosier booking, réserver transport Guadeloupe" />
         <link rel="canonical" href="https://votre-site.vercel.app/reservation" />
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
       <div className="min-h-screen bg-gray-50">
         <nav className="bg-white shadow-sm">
@@ -125,19 +127,65 @@ export default function Reservation() {
                   <label className="block text-sm font-medium text-gray-700">Lieu de prise en charge</label>
                   <select name="pickup" className="w-full p-2 border rounded-lg" required>
                     <option value="">Sélectionnez une commune</option>
-                    <option value="Les Abymes">Les Abymes</option>
+                    <option value="Anse-Bertrand">Anse-Bertrand</option>
+                    <option value="Baie-Mahault">Baie-Mahault</option>
+                    <option value="Baillif">Baillif</option>
+                    <option value="Basse-Terre">Basse-Terre</option>
+                    <option value="Bouillante">Bouillante</option>
                     <option value="Capesterre-Belle-Eau">Capesterre-Belle-Eau</option>
+                    <option value="Deshaies">Deshaies</option>
+                    <option value="Gourbeyre">Gourbeyre</option>
+                    <option value="Goyave">Goyave</option>
+                    <option value="Lamentin">Lamentin</option>
+                    <option value="Les Abymes">Les Abymes</option>
+                    <option value="Le Gosier">Le Gosier</option>
+                    <option value="Le Moule">Le Moule</option>
+                    <option value="Morne-à-l'Eau">Morne-à-l'Eau</option>
+                    <option value="Petit-Bourg">Petit-Bourg</option>
+                    <option value="Petit-Canal">Petit-Canal</option>
+                    <option value="Pointe-à-Pitre">Pointe-à-Pitre</option>
+                    <option value="Pointe-Noire">Pointe-Noire</option>
+                    <option value="Port-Louis">Port-Louis</option>
+                    <option value="Saint-Claude">Saint-Claude</option>
                     <option value="Saint-François">Saint-François</option>
+                    <option value="Sainte-Anne">Sainte-Anne</option>
+                    <option value="Sainte-Rose">Sainte-Rose</option>
+                    <option value="Vieux-Habitants">Vieux-Habitants</option>
                   </select>
+                  <label className="block text-sm font-medium text-gray-700 mt-2">Précision (100 caractères max)</label>
+                  <input type="text" name="pickupPrecision" maxLength="100" className="w-full p-2 border rounded-lg" />
                 </div>
                 <div className="w-full">
                   <label className="block text-sm font-medium text-gray-700">Destination</label>
                   <select name="destination" className="w-full p-2 border rounded-lg" required>
                     <option value="">Sélectionnez une commune</option>
-                    <option value="Les Abymes">Les Abymes</option>
+                    <option value="Anse-Bertrand">Anse-Bertrand</option>
+                    <option value="Baie-Mahault">Baie-Mahault</option>
+                    <option value="Baillif">Baillif</option>
+                    <option value="Basse-Terre">Basse-Terre</option>
+                    <option value="Bouillante">Bouillante</option>
                     <option value="Capesterre-Belle-Eau">Capesterre-Belle-Eau</option>
+                    <option value="Deshaies">Deshaies</option>
+                    <option value="Gourbeyre">Gourbeyre</option>
+                    <option value="Goyave">Goyave</option>
+                    <option value="Lamentin">Lamentin</option>
+                    <option value="Les Abymes">Les Abymes</option>
+                    <option value="Le Gosier">Le Gosier</option>
+                    <option value="Le Moule">Le Moule</option>
+                    <option value="Morne-à-l'Eau">Morne-à-l'Eau</option>
+                    <option value="Petit-Bourg">Petit-Bourg</option>
+                    <option value="Petit-Canal">Petit-Canal</option>
+                    <option value="Pointe-à-Pitre">Pointe-à-Pitre</option>
+                    <option value="Pointe-Noire">Pointe-Noire</option>
+                    <option value="Port-Louis">Port-Louis</option>
+                    <option value="Saint-Claude">Saint-Claude</option>
                     <option value="Saint-François">Saint-François</option>
+                    <option value="Sainte-Anne">Sainte-Anne</option>
+                    <option value="Sainte-Rose">Sainte-Rose</option>
+                    <option value="Vieux-Habitants">Vieux-Habitants</option>
                   </select>
+                  <label className="block text-sm font-medium text-gray-700 mt-2">Précision (100 caractères max)</label>
+                  <input type="text" name="destinationPrecision" maxLength="100" className="w-full p-2 border rounded-lg" />
                 </div>
               </div>
               <div className="col-span-2">
@@ -174,7 +222,9 @@ export default function Reservation() {
                 <p className="mb-2"><strong>Date :</strong> {formData.date}</p>
                 <p className="mb-2"><strong>Heure :</strong> {formData.time}</p>
                 <p className="mb-2"><strong>Lieu de prise en charge :</strong> {formData.pickup}</p>
+                <p className="mb-2"><strong>Précision prise en charge :</strong> {formData.pickupPrecision}</p>
                 <p className="mb-2"><strong>Destination :</strong> {formData.destination}</p>
+                <p className="mb-2"><strong>Précision destination :</strong> {formData.destinationPrecision}</p>
                 <p className="text-red-600 mb-4">Attention : Validation définitive, seul moi (le propriétaire) peux modifier.</p>
                 <div className="flex justify-end space-x-4">
                   <button onClick={() => setShowRecap(false)} className="bg-gray-500 text-white p-2 rounded-lg">Annuler</button>
