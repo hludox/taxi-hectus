@@ -2,8 +2,8 @@ export default function handler(req, res) {
   if (req.method === 'POST') {
     const { date, time, pickup, destination, nom, prenom, service, phone } = req.body;
 
-    // Récupère la clé API depuis les variables d'environnement (pas en dur !)
-    const apiKey = process.env.CALCOM_API_KEY;
+    // Utilise la clé depuis l'environnement (sécurisé sur Netlify), temporaire pour test local
+    const apiKey = process.env.CALCOM_API_KEY || 'calcomapi'; // Supprime 'calcomapi' après config Netlify
     if (!apiKey) {
       return res.status(500).json({ message: 'Clé API non configurée' });
     }
@@ -17,7 +17,7 @@ export default function handler(req, res) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        eventTypeId: 1, // Remplace par l'ID de ton événement "taxi-guadeloupe" dans Cal.com
+        eventTypeId: 1, // Remplace par l’ID réel de "taxi-guadeloupe" dans Cal.com
         start: `${date}T${time}:00Z`, // Format ISO
         end: `${date}T${time}:30Z`, // Ajuste la durée (30 min ici)
         title: `${nom} ${prenom} - ${service}`,
