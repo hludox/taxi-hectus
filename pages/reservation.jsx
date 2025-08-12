@@ -1,16 +1,21 @@
 export const dynamic = 'force-static';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Reservation() {
   const [selectedService, setSelectedService] = useState('course');
+  const [loading, setLoading] = useState(true);
 
   const services = [
     { id: 'course', name: 'Course Simple', description: 'Trajet unique d\'un point A vers un point B', icon: '🚗' },
     { id: 'aeroport', name: 'Transfert Aéroport', description: 'Navette depuis/vers l\'aéroport Pôle Caraïbes', icon: '✈️' },
     { id: 'excursion', name: 'Excursion/Attente', description: 'Service avec attente sur site (plage, visite, etc.)', icon: '🏖️' },
   ];
+
+  useEffect(() => {
+    setLoading(false); // Cache le loader une fois chargé
+  }, []);
 
   return (
     <>
@@ -21,7 +26,11 @@ export default function Reservation() {
         <link rel="canonical" href="https://votre-site.vercel.app/reservation" />
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
       </Head>
-
+      {loading && (
+        <div className="fixed inset-0 bg-gray-50 flex items-center justify-center z-50">
+          <div className="animate-spin h-12 w-12 border-4 border-green-600 rounded-full border-t-transparent"></div>
+        </div>
+      )}
       <div className="min-h-screen bg-gray-50">
         <nav className="bg-white shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
