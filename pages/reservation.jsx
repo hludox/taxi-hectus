@@ -1,11 +1,13 @@
 export const dynamic = 'force-static';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function Reservation() {
   const [selectedService, setSelectedService] = useState('course');
-  const [loading, setLoading] = useState(true);
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [showRecap, setShowRecap] = useState(false);
+  const [formData, setFormData] = useState({});
 
   const services = [
     { id: 'course', name: 'Course Simple', description: 'Trajet unique d\'un point A vers un point B', icon: '🚗' },
@@ -13,9 +15,27 @@ export default function Reservation() {
     { id: 'excursion', name: 'Excursion/Attente', description: 'Service avec attente sur site (plage, visite, etc.)', icon: '🏖️' },
   ];
 
-  useEffect(() => {
-    setLoading(false); // Cache le loader une fois chargé
-  }, []);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    setFormData({
+      date: data.get('date'),
+      time: data.get('time'),
+      pickup: data.get('pickup'),
+      destination: data.get('destination'),
+      nom: data.get('nom'),
+      prenom: data.get('prenom'),
+      service: selectedService,
+      phone: data.get('phone'),
+    });
+    setShowRecap(true);
+  };
+
+  const confirmReservation = () => {
+    // Ici, envoi manuel à Cal.com ou e-mail (pas auto)
+    alert('Réservation confirmée ! Validation définitive. Vous recevrez un appel de ma part.');
+    setShowRecap(false);
+  };
 
   return (
     <>
@@ -26,11 +46,6 @@ export default function Reservation() {
         <link rel="canonical" href="https://votre-site.vercel.app/reservation" />
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
       </Head>
-      {loading && (
-        <div className="fixed inset-0 bg-gray-50 flex items-center justify-center z-50">
-          <div className="animate-spin h-12 w-12 border-4 border-green-600 rounded-full border-t-transparent"></div>
-        </div>
-      )}
       <div className="min-h-screen bg-gray-50">
         <nav className="bg-white shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -76,21 +91,21 @@ export default function Reservation() {
 
           <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
             <h2 className="text-xl font-semibold text-gray-900 mb-6">Détails de votre réservation</h2>
-            <form className="space-y-4 md:space-y-0 md:grid md:grid-cols-2 md:gap-4">
+            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-0 md:grid md:grid-cols-2 md:gap-4">
               <div className="md:flex md:space-x-4 md:col-span-2">
                 <div className="w-full">
                   <label className="block text-sm font-medium text-gray-700">Date</label>
-                  <input type="date" className="w-full p-2 border rounded-lg" required />
+                  <input type="date" name="date" className="w-full p-2 border rounded-lg" required />
                 </div>
                 <div className="w-full">
                   <label className="block text-sm font-medium text-gray-700">Heure</label>
-                  <input type="time" className="w-full p-2 border rounded-lg" required />
+                  <input type="time" name="time" className="w-full p-2 border rounded-lg" required />
                 </div>
               </div>
               <div className="md:flex md:space-x-4 md:col-span-2">
                 <div className="w-full">
                   <label className="block text-sm font-medium text-gray-700">Lieu de prise en charge</label>
-                  <select className="w-full p-2 border rounded-lg" required>
+                  <select name="pickup" className="w-full p-2 border rounded-lg" required>
                     <option value="">Sélectionnez une commune</option>
                     <option value="Les Abymes">Les Abymes</option>
                     <option value="Capesterre-Belle-Eau">Capesterre-Belle-Eau</option>
@@ -99,7 +114,7 @@ export default function Reservation() {
                 </div>
                 <div className="w-full">
                   <label className="block text-sm font-medium text-gray-700">Destination</label>
-                  <select className="w-full p-2 border rounded-lg" required>
+                  <select name="destination" className="w-full p-2 border rounded-lg" required>
                     <option value="">Sélectionnez une commune</option>
                     <option value="Les Abymes">Les Abymes</option>
                     <option value="Capesterre-Belle-Eau">Capesterre-Belle-Eau</option>
@@ -107,13 +122,23 @@ export default function Reservation() {
                   </select>
                 </div>
               </div>
+              <div className="md:flex md:space-x-4 md:col-span-2">
+                <div className="w-full">
+                  <label className="block text-sm font-medium text-gray-700">Nom</label>
+                  <input type="text" name="nom" className="w-full p-2 border rounded-lg" required />
+                </div>
+                <div className="w-full">
+                  <label className="block text-sm font-medium text-gray-700">Prénom</label>
+                  <input type="text" name="prenom" className="w-full p-2 border rounded-lg" required />
+                </div>
+              </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Type de trajet</label>
-                <input type="text" value={selectedService} readOnly className="w-full p-2 border rounded-lg" />
+                <input type="text" value={selectedService} readOnly name="service" className="w-full p-2 border rounded-lg" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Téléphone</label>
-                <input type="tel" className="w-full p-2 border rounded-lg" required />
+                <input type="tel" name="phone" className="w-full p-2 border rounded-lg" required />
               </div>
               <div className="col-span-2">
                 <button type="submit" className="w-full bg-green-600 text-white p-3 rounded-lg hover:bg-green-700">Réserver</button>
@@ -121,17 +146,21 @@ export default function Reservation() {
             </form>
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">Aperçu des disponibilités</h2>
-            <iframe
-              src="https://www.cal.com/ludovic-hectus-jmw8zo/taxi-guadeloupe?embed=true"
-              width="100%"
-              height="600"
-              frameBorder="0"
-              title="Aperçu des disponibilités Taxi Hectus"
-              className="w-full"
-            ></iframe>
-          </div>
+          {/* Bouton pour le calendrier */}
+          <button onClick={() => setShowCalendar(!showCalendar)} className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 mb-4">Planning des rendez-vous</button>
+          {showCalendar && (
+            <div className="bg-white rounded-lg shadow-sm p-6">
+              <h2 className="text-xl font-semibold text-gray-900 mb-6">Aperçu des disponibilités</h2>
+              <iframe
+                src="https://www.cal.com/ludovic-hectus-jmw8zo/taxi-guadeloupe?embed=true"
+                width="100%"
+                height="600"
+                frameBorder="0"
+                title="Aperçu des disponibilités Taxi Hectus"
+                className="w-full"
+              ></iframe>
+            </div>
+          )}
         </div>
       </div>
     </>
